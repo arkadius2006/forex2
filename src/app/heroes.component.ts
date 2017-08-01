@@ -27,12 +27,8 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  getHeroesPromise(): Promise<Hero[]> {
-    return Promise.resolve(HEROES);
-  }
-
   ngOnInit(): void {
-    const promise = this.getHeroesPromise();
+    const promise = this.heroService.getHeroesPromise();
     promise.then(data => this.heroes = data);
   }
 }
