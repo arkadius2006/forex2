@@ -1,5 +1,5 @@
 export class Position {
   account: string;
-  symbol: string;
+  currency: string;
   quantity: number;
 }

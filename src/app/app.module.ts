@@ -15,9 +15,15 @@ import {RouterModule} from '@angular/router';
 
 import {DashboardComponent} from './dashboard.component';
 
+import {MarketComponent} from './forex/market.component';
+import {PortfolioComponent} from './forex/portfolio.component';
+import {HistoryComponent} from './forex/history.component';
+
+// todo rename this file to forex module
+
 @NgModule({
   declarations: [
-    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent
+    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, MarketComponent, PortfolioComponent, HistoryComponent
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot([
