@@ -1,6 +1,6 @@
 import {Currency} from './Currency';
 
-export class CurrencyPosition {
+export class Position {
   account: string;
   currency: Currency;
   quantity: number;

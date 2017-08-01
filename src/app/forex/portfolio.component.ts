@@ -1,10 +1,10 @@
-import {CurrencyPosition} from './CurrencyPosition';
+import {Position} from './Position';
 import {Component} from '@angular/core';
 
 import {USD, JPY} from './Currency';
 
 // todo mock for now
-const POSITIONS: CurrencyPosition[] = [
+const POSITIONS: Position[] = [
   {
     account: 'Seletsky',
     currency: USD,
@@ -27,5 +27,5 @@ const POSITIONS: CurrencyPosition[] = [
 })
 
 export class PortfolioComponent {
-  positions: CurrencyPosition[] = POSITIONS;
+  positions: Position[] = POSITIONS;
 }
