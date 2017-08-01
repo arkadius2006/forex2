@@ -1,32 +1,34 @@
-import {Order} from './Order';
 import {Component} from '@angular/core';
+
+import {SpotTrade} from './SpotTrade';
+import {Currency} from './Currency';
+import {CurrencyPair} from './CurrencyPair';
 import {Side} from './Side';
 
-// todo mock for now
-const ORDERS: Order[] = [
+// currencies
+
+
+
+const USD: Currency = new Currency('USD');
+
+
+
+const JPY: Currency = new Currency('JPY');
+
+// currency pairs
+
+
+const USDJPY: CurrencyPair = new CurrencyPair(USD, JPY);
+
+const TRADES: SpotTrade[] = [
   {
-    account: 'Selesky',
-    symbol: 'USDJPY',
-    side: Side.buy,
+    currencyPair: USDJPY,
+    rate: 12.34,
     quantity: 100,
-    price: 12.34,
-    timestamp: 123456
-  },
-  {
-    account: 'Selesky',
-    symbol: 'EURUSD',
-    side: Side.sell,
-    quantity: 200,
-    price: 56.34,
-    timestamp: 123478
-  },
-  {
-    account: 'Selesky',
-    symbol: 'GBPUSD',
     side: Side.buy,
-    quantity: 300,
-    price: 78.34,
-    timestamp: 435676
+    account: 'Seletsky',
+    tradeDate: new Date(),
+    settlementDate: new Date()
   }
 ];
 
@@ -34,13 +36,13 @@ const ORDERS: Order[] = [
   selector: 'app-history',
   template: '<h2>History</h2>' +
   '<ul>' +
-  '<li *ngFor="let order of orders">when: {{order.timestamp}} ' +
-  'what: {{order.side}} {{order.symbol}} - {{order.account}} ' +
-  'how much: {{order.quantity}} ' +
-  'price: {{order.price}}</li>' +
+  '<li *ngFor="let trade of trades">when: {{trade.timestamp}} ' +
+  'what: {{trade.side}} {{trade.symbol}} - {{trade.account}} ' +
+  'how much: {{trade.quantity}} ' +
+  'price: {{trade.price}}</li>' +
   '</ul>'
 })
 
 export class HistoryComponent {
-  orders: Order[] = ORDERS;
+  trades: SpotTrade[] = TRADES;
 }
