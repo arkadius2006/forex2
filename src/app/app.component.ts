@@ -1,13 +1,8 @@
 import {Component} from '@angular/core';
 import {Hero} from './hero';
-
-
-const HEROES: Hero[] = [
-  {id: 11, name: 'Mr. Nice'},
-  {id: 12, name: 'Narco'},
-  {id: 13, name: 'Bombasto'},
-  {id: 14, name: 'Celeritas'}
-];
+import {HeroService} from './hero.service';
+import {OnInit} from '@angular/core';
+import {HEROES} from './mock-heroes';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +13,29 @@ const HEROES: Hero[] = [
   '<li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">' +
   '<span class="badge">{{hero.id}}</span>{{hero.name}}</li>' +
   '</ul>' +
-  '<hero-detail [hero]="selectedHero"></hero-detail>'
+  '<hero-detail [hero]="selectedHero"></hero-detail>',
+  providers: [HeroService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'arkady first angular app';
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[];
+
+  constructor(private heroService: HeroService) {
+
+  }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+  }
+
+  getHeroesPromise(): Promise<Hero[]> {
+    return Promise.resolve(HEROES);
+  }
+
+  ngOnInit(): void {
+    const promise = this.getHeroesPromise();
+    promise.then(data => this.heroes = data);
   }
 }
