@@ -4,7 +4,9 @@ import {Component} from '@angular/core';
   selector: 'app-root',
   styleUrls: ['./app.component.css'],
   template: '<h1>{{title}}</h1>' +
-  '<app-heroes></app-heroes>'
+  '<nav><a routerLink="/dashboard">Dashboard</a></nav>' +
+  '<nav><a routerLink="/heroes">Heroes</a></nav>' +
+  '<router-outlet></router-outlet>'
 })
 
 export class AppComponent {

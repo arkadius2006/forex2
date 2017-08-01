@@ -12,7 +12,7 @@ import {HEROES} from './mock-heroes';
   '<span class="badge">{{hero.id}}</span>{{hero.name}}</li>' +
   '</ul>' +
   '<app-hero-detail [hero]="selectedHero"></app-hero-detail>',
-  providers: [HeroService]
+  providers: []
 })
 
 export class HeroesComponent implements OnInit {
