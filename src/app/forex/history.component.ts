@@ -1,24 +1,8 @@
 import {Component} from '@angular/core';
 
 import {SpotTrade} from './SpotTrade';
-import {Currency} from './Currency';
-import {CurrencyPair} from './CurrencyPair';
+import {USDJPY} from './CurrencyPair';
 import {Side} from './Side';
-
-// currencies
-
-
-
-const USD: Currency = new Currency('USD');
-
-
-
-const JPY: Currency = new Currency('JPY');
-
-// currency pairs
-
-
-const USDJPY: CurrencyPair = new CurrencyPair(USD, JPY);
 
 const TRADES: SpotTrade[] = [
   {
