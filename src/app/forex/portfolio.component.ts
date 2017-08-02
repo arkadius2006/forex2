@@ -1,7 +1,7 @@
-import {Position} from './Position';
+import {Position} from '../finance-domain/Position';
 import {Component} from '@angular/core';
 
-import {USD, JPY} from './Currency';
+import {USD, JPY} from '../finance-domain/Currency';
 
 // todo mock for now
 const POSITIONS: Position[] = [

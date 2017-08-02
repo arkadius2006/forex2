@@ -1,6 +1,6 @@
-import {Quote} from './Quote';
+import {Quote} from '../finance-domain/Quote';
 import {Component} from '@angular/core';
-import {EURUSD, USDJPY} from './CurrencyPair';
+import {EURUSD, USDJPY} from '../finance-domain/CurrencyPair';
 
 // todo: move to mock const market service
 const QUOTES: Quote[] = [

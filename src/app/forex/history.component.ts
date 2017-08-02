@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
-import {SpotTrade} from './SpotTrade';
-import {USDJPY} from './CurrencyPair';
-import {BUY} from './Side';
+import {SpotTrade} from '../finance-domain/SpotTrade';
+import {USDJPY} from '../finance-domain/CurrencyPair';
+import {BUY} from '../finance-domain/Side';
 
 const TRADES: SpotTrade[] = [
   {
