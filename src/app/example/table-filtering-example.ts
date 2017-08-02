@@ -11,8 +11,8 @@ import {DataSource} from '@angular/cdk/table';
 
 @Component({
   selector: 'table-filtering-example',
-  styleUrls: ['src/app/example/table-filtering-example.css'],
-  templateUrl: 'src/app/example/table-filtering-example.html',
+  styleUrls: ['table-filtering-example.css'],
+  templateUrl: 'table-filtering-example.html',
 })
 export class TableFilteringExample {
   displayedColumns = ['userId', 'userName', 'progress', 'color'];

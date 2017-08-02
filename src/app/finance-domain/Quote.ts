@@ -4,5 +4,5 @@ export class Quote {
   currencyPair: CurrencyPair;
   bid: number;
   ask: number;
-  timestamp: number;
+  timestamp: Date;
 }
