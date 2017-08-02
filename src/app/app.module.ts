@@ -15,9 +15,9 @@ import {RouterModule} from '@angular/router';
 
 import {DashboardComponent} from './dashboard.component';
 
-import {MarketComponent} from './forex/market.component';
-import {PortfolioComponent} from './forex/portfolio.component';
-import {HistoryComponent} from './forex/history.component';
+import {MarketComponent} from './market/market.component';
+import {PortfolioComponent} from './position/portfolio.component';
+import {HistoryComponent} from './history/history.component';
 
 
 
@@ -58,7 +58,7 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
-import {TableFilteringExample} from "./forex/table-filtering-example";
+import {TableFilteringExample} from "./example/table-filtering-example";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 // todo rename this file to forex module
