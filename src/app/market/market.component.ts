@@ -8,8 +8,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import {DataSource} from '@angular/cdk/table';
-import {CurrencyPair, MAJOR_CURRENCY_PAIRS} from '../finance-domain/CurrencyPair';
 import {Quote} from '../finance-domain/Quote';
+import {MarketService} from './market-service';
 
 @Component({
   selector: 'app-market-component',
@@ -18,10 +18,14 @@ import {Quote} from '../finance-domain/Quote';
 })
 export class MarketComponent implements OnInit {
   displayedColumns = ['currencyPair', 'bid', 'ask', 'timestamp'];
-  exampleDatabase = new ExampleDatabase();
+  exampleDatabase;
   marketSource: ExampleDataSource | null;
 
   @ViewChild('filter') filter: ElementRef;
+
+  constructor(private marketService: MarketService) {
+    this.exampleDatabase = new ExampleDatabase(marketService);
+  }
 
   ngOnInit() {
     this.marketSource = new ExampleDataSource(this.exampleDatabase);
@@ -39,28 +43,9 @@ export class ExampleDatabase {
   dataChange: BehaviorSubject<Quote[]> = new BehaviorSubject<Quote[]>([]);
   get data(): Quote[] { return this.dataChange.value; }
 
-  constructor() {
-    let currencyPair;
-    for (let i = 0; i < MAJOR_CURRENCY_PAIRS.length; i++) {
-      currencyPair = MAJOR_CURRENCY_PAIRS[i];
-      this.addQuote(currencyPair);
-    }
-  }
-
-
-  private addQuote(currencyPair: CurrencyPair) {
-    const copiedData = this.data.slice();
-    copiedData.push(this.createNewQuote(currencyPair));
-    this.dataChange.next(copiedData);
-  }
-
-  private createNewQuote(currencyPair: CurrencyPair): Quote {
-    return {
-      currencyPair: currencyPair,
-      bid: Math.floor(Math.random() * 10000) / 100,
-      ask: Math.floor(Math.random() * 10000) / 100,
-      timestamp: new Date()
-    };
+  constructor(private marketService: MarketService) {
+    const promise = this.marketService.getMarketPromise();
+    promise.then(data => this.dataChange.next(data));
   }
 }
 

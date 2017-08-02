@@ -58,6 +58,7 @@ import {
 import {CdkTableModule} from '@angular/cdk/table';
 import {TableFilteringExample} from './example/table-filtering-example';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MarketService} from "./market/market-service";
 
 // todo rename this file to forex module
 
@@ -167,7 +168,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
 
     BrowserAnimationsModule
   ],
-  providers: [HeroService],
+  providers: [HeroService, MarketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
