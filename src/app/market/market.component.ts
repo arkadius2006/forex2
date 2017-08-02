@@ -23,7 +23,7 @@ export class MarketComponent implements OnInit {
 
   @ViewChild('filter') filter: ElementRef;
 
-  ngOnInit() { // todo fix
+  ngOnInit() {
     this.marketSource = new ExampleDataSource(this.exampleDatabase);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)

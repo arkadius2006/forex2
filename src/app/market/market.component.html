@@ -1,9 +1,9 @@
 <div class="market-container mat-elevation-z8">
-  <div class="market-header">
-    <md-input-container floatPlaceholder="never">
+  <form class="market-form">
+    <md-input-container class="market-input-container" floatPlaceholder="always">
       <input mdInput #filter placeholder="Type currency pair...">
     </md-input-container>
-  </div>
+  </form>
 
   <md-table #table [dataSource]="marketSource">
 
