@@ -33,7 +33,9 @@ export class MarketComponent implements OnInit {
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
-        if (!this.marketSource) { return; }
+        if (!this.marketSource) {
+          return;
+        }
         this.marketSource.filter = this.filter.nativeElement.value;
       });
   }
@@ -41,18 +43,40 @@ export class MarketComponent implements OnInit {
 
 export class ExampleDatabase {
   dataChange: BehaviorSubject<Quote[]> = new BehaviorSubject<Quote[]>([]);
-  get data(): Quote[] { return this.dataChange.value; }
+  promise: Promise<Quote[]>;
+
+  get data(): Quote[] {
+    return this.dataChange.value;
+  }
 
   constructor(private marketService: MarketService) {
-    const promise = this.marketService.getMarketPromise();
-    promise.then(data => this.dataChange.next(data));
+    this.initPromise();
+  }
+
+  private initPromise() {
+    this.promise = this.marketService.getDelayedMarketPromise();
+    this.promise.then(data => this.onMarketDataUpdate(data));
+  }
+
+  private onMarketDataUpdate(data: Quote[]): void {
+    console.log('Received market data updated');
+    this.dataChange.next(data);
+
+    // ask for new promise!!! again...
+    this.initPromise();
   }
 }
 
 export class ExampleDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
-  get filter(): string { return this._filterChange.value; }
-  set filter(filter: string) { this._filterChange.next(filter); }
+
+  get filter(): string {
+    return this._filterChange.value;
+  }
+
+  set filter(filter: string) {
+    this._filterChange.next(filter);
+  }
 
   constructor(private _exampleDatabase: ExampleDatabase) {
     super();
@@ -73,5 +97,6 @@ export class ExampleDataSource extends DataSource<any> {
     });
   }
 
-  disconnect() {}
+  disconnect() {
+  }
 }

@@ -27,4 +27,12 @@ export class MarketService {
       timestamp: new Date()
     };
   }
+
+  getDelayedMarketPromise(): Promise<Quote[]> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(this.getMarketPromise());
+      }, 2000);
+    });
+  }
 }
