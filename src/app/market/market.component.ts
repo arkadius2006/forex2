@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -16,7 +16,7 @@ import {Quote} from '../finance-domain/Quote';
   styleUrls: ['market.component.css'],
   templateUrl: 'market.component.html',
 })
-export class MarketComponent {
+export class MarketComponent implements OnInit {
   displayedColumns = ['currencyPair', 'bid', 'ask', 'timestamp'];
   exampleDatabase = new ExampleDatabase();
   marketSource: ExampleDataSource | null;

@@ -1,7 +1,7 @@
 <div class="market-container mat-elevation-z8">
   <div class="market-header">
     <md-input-container floatPlaceholder="never">
-      <input mdInput #filter placeholder="Type currency pair..." style="border: 2px solid red">
+      <input mdInput #filter placeholder="Type currency pair...">
     </md-input-container>
   </div>
 
@@ -24,7 +24,7 @@
 
     <ng-container cdkColumnDef="timestamp">
       <md-header-cell *cdkHeaderCellDef> Timestamp </md-header-cell>
-      <md-cell *cdkCellDef="let quote"> {{quote.timestamp}} </md-cell>
+      <md-cell *cdkCellDef="let quote"> {{quote.timestamp.toLocaleTimeString()}} </md-cell>
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
