@@ -8,7 +8,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import {DataSource} from '@angular/cdk/table';
-// import {DataSource} from '@angular/cdk/typings/table/data-source';
 
 @Component({
   selector: 'table-filtering-example',
