@@ -1,5 +1,5 @@
 export class Currency {
-  constructor(public symbol: string) {
+  constructor(private symbol: string) {
   }
 
   public toString(): string {

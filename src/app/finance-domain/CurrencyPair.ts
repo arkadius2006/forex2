@@ -2,7 +2,7 @@ import {Currency, EUR, JPY, USD} from './Currency';
 
 export class CurrencyPair {
 
-  constructor(public baseCurrency: Currency, public counterCurrency: Currency) {
+  constructor(private baseCurrency: Currency, private counterCurrency: Currency) {
   }
 
   public toString(): string {

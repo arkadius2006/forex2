@@ -1,6 +1,6 @@
 export class Side {
 
-  constructor(public symbol) {
+  constructor(private symbol) {
 
   }
 
