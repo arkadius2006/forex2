@@ -8,6 +8,14 @@ export class CurrencyPair {
   public toString(): string {
       return this.baseCurrency + '/' + this.counterCurrency;
   }
+
+  public getBaseCurrency(): Currency {
+    return this.baseCurrency;
+  }
+
+  public getCounterCurrency(): Currency {
+    return this.counterCurrency;
+  }
 }
 
 // major currency pairs
