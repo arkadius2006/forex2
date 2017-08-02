@@ -42,6 +42,10 @@
       <md-cell *cdkCellDef="let trade"> {{trade.settlementDate.toDateString()}} </md-cell>
     </ng-container>
 
+    <ng-container cdkColumnDef="status">
+      <md-header-cell *cdkHeaderCellDef> Trade status </md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.status}} </md-cell>
+    </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *cdkRowDef="let trade; columns: displayedColumns;"></md-row>

@@ -11,6 +11,7 @@ import {DataSource} from '@angular/cdk/table';
 import {SpotTrade} from '../finance-domain/SpotTrade';
 import {CurrencyPair, MAJOR_CURRENCY_PAIRS} from '../finance-domain/CurrencyPair';
 import {BUY, SELL, Side} from '../finance-domain/Side';
+import {CAPTURED} from "../finance-domain/TradeStatus";
 
 @Component({
   selector: 'app-history-component',
@@ -18,7 +19,7 @@ import {BUY, SELL, Side} from '../finance-domain/Side';
   templateUrl: 'history.component.html',
 })
 export class HistoryComponent implements OnInit {
-  displayedColumns = ['account', 'side', 'currencyPair', 'quantity', 'rate', 'tradeDate', 'settlementDate'];
+  displayedColumns = ['account', 'side', 'currencyPair', 'quantity', 'rate', 'tradeDate', 'settlementDate', 'status'];
   historySource: ExampleHistoryDataSource | null;
 
   @ViewChild('historyFilterCurrencyPair') filter: ElementRef;
@@ -72,19 +73,17 @@ export class ExampleHistoryDatabase {
     // todo replace with business calendar logic T+2
     const theSettlementDate: Date = new Date(theTradeDate.getTime() + 2 * 24 * 60 * 60 * 1000);
 
-    const theAccount = 'Seletsky';
-
     return {
-      account: theAccount,
+      account: 'Seletsky',
       side: theSide,
       currencyPair: theCurrencyPair,
       quantity: theQuantity,
       rate: theRate,
       tradeDate: theTradeDate,
-      settlementDate: theSettlementDate
+      settlementDate: theSettlementDate,
+      status: CAPTURED
     };
   }
-
 }
 
 export class ExampleHistoryDataSource extends DataSource<any> {

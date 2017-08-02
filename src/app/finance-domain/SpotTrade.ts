@@ -1,5 +1,6 @@
 import {CurrencyPair} from './CurrencyPair';
 import {Side} from './Side';
+import {TradeStatus} from "./TradeStatus";
 
 export class SpotTrade {
   currencyPair: CurrencyPair;
@@ -9,4 +10,5 @@ export class SpotTrade {
   tradeDate: Date;
   settlementDate: Date;
   account: string;
+  status: TradeStatus;
 }
