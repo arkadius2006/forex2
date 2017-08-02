@@ -20,10 +20,7 @@ const QUOTES: Quote[] = [
 
 @Component({
   selector: 'app-market',
-  template: '<h2>Market</h2>' +
-  '<ul>' +
-  '<li *ngFor="let quote of quotes">{{quote.currencyPair}} bid {{quote.bid}} ask {{quote.ask}} timestamp {{quote.timestamp}}</li>' +
-  '</ul>'
+  templateUrl: './market.component.html'
 })
 
 export class MarketComponent {

@@ -19,10 +19,7 @@ const POSITIONS: Position[] = [
 
 @Component({
   selector: 'app-portfolio',
-  template: '<h2>Portfolio</h2>' +
-  '<ul>' +
-  '<li *ngFor="let position of positions">{{position.account}} {{position.currency}} {{position.quantity}}</li>' +
-  '</ul>'
+  templateUrl: './portfolio.component.html'
 
 })
 

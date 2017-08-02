@@ -18,13 +18,7 @@ const TRADES: SpotTrade[] = [
 
 @Component({
   selector: 'app-history',
-  template: '<h2>History</h2>' +
-  '<ul>' +
-  '<li *ngFor="let trade of trades">when: {{trade.tradeDate}} ' +
-  'what: {{trade.side}} {{trade.symbol}} - {{trade.account}} ' +
-  'how much: {{trade.quantity}} ' +
-  'price: {{trade.rate}}</li>' +
-  '</ul>'
+  templateUrl: './history.component.html'
 })
 
 export class HistoryComponent {

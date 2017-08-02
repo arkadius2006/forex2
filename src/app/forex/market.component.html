@@ -1,0 +1,10 @@
+<h2>Market</h2>
+
+<ul>
+  <li *ngFor="let quote of quotes">
+    currencyPair {{quote.currencyPair}}
+    bid {{quote.bid}}
+    ask {{quote.ask}}
+    timestamp {{quote.timestamp}}
+  </li>
+</ul>
