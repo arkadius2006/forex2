@@ -81,8 +81,9 @@ export class ExampleDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this._exampleDatabase.data.slice().filter((quote: Quote) => {
-        const searchStr = quote.currencyPair.toString().toLowerCase();
-        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+        const theString: string = this.filter.trim().toLowerCase().replace('/', '');
+        const aString: string = quote.currencyPair.toString().toLowerCase().replace('/', '');
+        return aString.indexOf(theString) !== -1;
       });
     });
   }

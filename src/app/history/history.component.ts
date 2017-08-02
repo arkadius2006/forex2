@@ -11,7 +11,7 @@ import {DataSource} from '@angular/cdk/table';
 import {SpotTrade} from '../finance-domain/SpotTrade';
 import {CurrencyPair, MAJOR_CURRENCY_PAIRS} from '../finance-domain/CurrencyPair';
 import {BUY, SELL, Side} from '../finance-domain/Side';
-import {CAPTURED} from "../finance-domain/TradeStatus";
+import {CAPTURED} from '../finance-domain/TradeStatus';
 
 @Component({
   selector: 'app-history-component',
@@ -111,8 +111,9 @@ export class ExampleHistoryDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this._exampleHistoryDatabase.data.slice().filter((trade: SpotTrade) => {
-        const searchStr = trade.currencyPair.toString().toLowerCase();
-        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+        const theString: string = this.filter.trim().toLowerCase().replace('/', '');
+        const aString: string = trade.currencyPair.toString().toLowerCase().replace('/', '');
+        return aString.indexOf(theString) !== -1;
       });
     });
   }
