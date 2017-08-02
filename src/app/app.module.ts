@@ -20,8 +20,6 @@ import {PortfolioComponent} from './position/portfolio.component';
 import {HistoryComponent} from './history/history.component';
 
 
-
-
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -106,31 +104,31 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
 
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot([
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'heroes',
-        component: HeroesComponent
-      },
-      {
-        path: 'market',
-        component: MarketComponent
-      },
-      {
-        path: 'portfolio',
-        component: PortfolioComponent
-      },
-      {
-        path: 'history',
-        component: HistoryComponent
-      },
+        {
+          path: 'dashboard',
+          component: DashboardComponent
+        },
+        {
+          path: 'heroes',
+          component: HeroesComponent
+        },
+        {
+          path: 'market',
+          component: MarketComponent
+        },
+        {
+          path: 'portfolio',
+          component: PortfolioComponent
+        },
+        {
+          path: 'history',
+          component: HistoryComponent
+        },
         {
           path: 'demo',
           component: TableFilteringExample
         }
-    ]
+      ]
     ),
     MdAutocompleteModule,
     MdButtonModule,
