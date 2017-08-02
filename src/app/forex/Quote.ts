@@ -1,5 +1,7 @@
+import {CurrencyPair} from './CurrencyPair';
+
 export class Quote {
-  symbol: string;
+  currencyPair: CurrencyPair;
   bid: number;
   ask: number;
   timestamp: number;

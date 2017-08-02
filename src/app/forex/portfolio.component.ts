@@ -21,7 +21,7 @@ const POSITIONS: Position[] = [
   selector: 'app-portfolio',
   template: '<h2>Portfolio</h2>' +
   '<ul>' +
-  '<li *ngFor="let position of positions">{{position.account}} {{position.currency}} {{position.quantity}}/</li>' +
+  '<li *ngFor="let position of positions">{{position.account}} {{position.currency}} {{position.quantity}}</li>' +
   '</ul>'
 
 })

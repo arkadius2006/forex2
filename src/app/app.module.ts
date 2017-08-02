@@ -28,11 +28,6 @@ import {HistoryComponent} from './forex/history.component';
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot([
       {
-        path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full'
-      },
-      {
         path: 'dashboard',
         component: DashboardComponent
       },
@@ -41,10 +36,18 @@ import {HistoryComponent} from './forex/history.component';
         component: HeroesComponent
       },
       {
-        path: 'detail/:id',
-        component: HeroDetailComponent
+        path: 'market',
+        component: MarketComponent
+      },
+      {
+        path: 'portfolio',
+        component: PortfolioComponent
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
       }
-      ])
+    ])
   ],
   providers: [HeroService],
   bootstrap: [AppComponent]
