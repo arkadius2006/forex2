@@ -16,7 +16,7 @@ import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 
 import {MarketComponent} from './market/market.component';
-import {PortfolioComponent} from './position/portfolio.component';
+import {PositionComponent} from './position/position.component';
 import {HistoryComponent} from './history/history.component';
 
 
@@ -56,14 +56,15 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
-import {TableFilteringExample} from "./example/table-filtering-example";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {TableFilteringExample} from './example/table-filtering-example';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 // todo rename this file to forex module
 
 @NgModule({
   declarations: [
-    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, MarketComponent, PortfolioComponent, HistoryComponent, TableFilteringExample
+    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent,
+    MarketComponent, PositionComponent, HistoryComponent, TableFilteringExample
   ],
 
   exports: [
@@ -117,8 +118,8 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
           component: MarketComponent
         },
         {
-          path: 'portfolio',
-          component: PortfolioComponent
+          path: 'position',
+          component: PositionComponent
         },
         {
           path: 'history',

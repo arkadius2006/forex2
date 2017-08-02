@@ -1,0 +1,29 @@
+<div class="market-container mat-elevation-z8">
+  <h2>This is positions</h2>
+  <form class="market-form">
+    <md-input-container class="market-input-container" floatPlaceholder="always">
+      <input mdInput #filter placeholder="Type currency pair...">
+    </md-input-container>
+  </form>
+
+  <md-table #table [dataSource]="positionSource">
+
+    <ng-container cdkColumnDef="currency">
+      <md-header-cell *cdkHeaderCellDef> Currency </md-header-cell>
+      <md-cell *cdkCellDef="let position"> {{position.currency}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="quantity">
+      <md-header-cell *cdkHeaderCellDef> Quantity </md-header-cell>
+      <md-cell *cdkCellDef="let position"> {{position.quantity}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="account">
+      <md-header-cell *cdkHeaderCellDef> Account </md-header-cell>
+      <md-cell *cdkCellDef="let position"> {{position.account}} </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let position; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

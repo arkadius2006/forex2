@@ -67,7 +67,7 @@ export class ExampleHistoryDatabase {
     const theRate = Math.floor((Math.random() * 10000)) / 100;
     const randomBooleanIndex = Math.floor(Math.random() * 2);
     const theSide: Side = (randomBooleanIndex === 0) ? BUY : SELL;
-    const theQuantity: number = Math.floor((Math.random() + 1) * 10) * 100;
+    const theQuantity: number = Math.floor(Math.random() * 10 + 1) * 100;
     const theTradeDate: Date = new Date();
 
     // todo replace with business calendar logic T+2

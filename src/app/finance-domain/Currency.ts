@@ -16,3 +16,5 @@ export const CHF: Currency = new Currency('CHF');
 export const AUD: Currency = new Currency('AUD');
 export const NZD: Currency = new Currency('NZD');
 export const CAD: Currency = new Currency('CAD');
+
+export const MAJOR_CURRENCIES = [USD, JPY, EUR, GBP, CHF, AUD, NZD, CAD];
