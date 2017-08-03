@@ -8,6 +8,7 @@ import {RandomMarketManager} from './RandomMarketManager';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {TradeManager} from './TradeManager';
+import {BUY, SELL} from './Side';
 
 @Injectable()
 export class PositionManager {
@@ -60,11 +61,31 @@ export class PositionManager {
     const baseCurrency: Currency = t.currencyPair.getBaseCurrency();
     const counterCurrency: Currency = t.currencyPair.getCounterCurrency();
 
-    const baseAmount = t.quantity;
-    const counterAmount = -t.rate * baseAmount;
+    let baseAmount;
+    let counterAmount;
+
+    switch (t.side) {
+      case BUY: {
+        baseAmount = t.quantity;
+        counterAmount = -t.rate * baseAmount;
+        break;
+      }
+
+      case SELL: {
+        baseAmount = t.quantity;
+        counterAmount = -t.rate * baseAmount;
+        break;
+      }
+
+      default: {
+        console.error('Unknown side: ' + t.side);
+        return;
+      }
+    }
 
     this.adjust(t.account, baseCurrency, baseAmount);
     this.adjust(t.account, counterCurrency, counterAmount);
+
   }
 
   private adjust(account: string, currency: Currency, amount: number): void {

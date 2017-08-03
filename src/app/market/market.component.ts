@@ -15,7 +15,7 @@ import {CurrencyPair} from '../finance-domain/CurrencyPair';
 import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
 import {TradeManager} from '../finance-domain/TradeManager';
 import {SpotTrade} from '../finance-domain/SpotTrade';
-import {BUY} from '../finance-domain/Side';
+import {BUY, SELL} from '../finance-domain/Side';
 import {CAPTURED} from '../finance-domain/TradeStatus';
 
 @Component({
@@ -116,8 +116,72 @@ export class MarketComponent implements OnInit {
   }
 
   onSellButtonClicked(): void {
-    console.log('Sell');
+    this.sell(
+      this.yourAccountComponent.get(),
+      this.yourCurrencyPairComponent.nativeElement.value,
+      this.yourQuantityComponent.nativeElement.value);
   }
+
+  private sell(account: string, pairString: string, quantityString: string): void {
+    if (isUndefined(account) || isNull(account) || account === '') {
+      console.log('Invalid account');
+      return;
+    }
+
+    let currencyPair: CurrencyPair;
+    if (isUndefined(pairString) || isNull(pairString) || pairString === '') {
+      console.log('Invalid pairString');
+      return;
+    }
+
+    currencyPair = CurrencyPair.lookup(pairString);
+    if (isNullOrUndefined(currencyPair)) {
+      console.log('Invalid currency pairString');
+      return;
+    }
+
+    if (isUndefined(quantityString) || isNull(quantityString) || quantityString === '') {
+      console.log('Invalid quantityString');
+      return;
+    }
+
+    const quantity: number = parseFloat(quantityString);
+    if (quantity > 0) {
+
+    } else {
+      console.log('Invalid qty');
+      return;
+    }
+
+    const quote: Quote = this.marketManager.getQuote(currencyPair);
+    if (isNullOrUndefined(quote)) {
+      console.log('No quote for ' + currencyPair);
+      return;
+    }
+
+    this.doSell(account, currencyPair, quantity, quote);
+  }
+
+  doSell(account: string, currencyPair: CurrencyPair, quantity: number, quote: Quote): void {
+    console.log('SELL ' + account + ' ' + currencyPair + ' ' + quantity);
+
+    const trade: SpotTrade = {
+      currencyPair: currencyPair,
+      account: account,
+      quantity: quantity,
+      rate: quote.bid,
+      side: SELL,
+      tradeDate: new Date(),
+      settlementDate: new Date(), // todo
+      status: CAPTURED
+    };
+
+    // todo go to order manager first
+
+    this.tradeManager.add(trade);
+  }
+
+
 }
 
 export class MarketDataSource extends DataSource<any> {
