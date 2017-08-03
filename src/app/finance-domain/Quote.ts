@@ -5,4 +5,8 @@ export class Quote {
   bid: number;
   ask: number;
   timestamp: Date;
+
+  public toString(): string {
+    return this.currencyPair + '@' + this.bid + '/' + this.ask;
+  }
 }

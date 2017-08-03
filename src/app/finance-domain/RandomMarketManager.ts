@@ -21,6 +21,21 @@ export class RandomMarketManager implements MarketManager {
     return this.marketChange.getValue();
   }
 
+  public getQuote(currencyPair: CurrencyPair): Quote {
+    const quotes: Quote[] = this.marketChange.getValue();
+    let i: number;
+    let q: Quote;
+    for (i = 0; i < quotes.length; i += 1) {
+      q = quotes[i];
+
+      if (currencyPair === q.currencyPair) {
+        return q;
+      }
+    }
+
+    return null;
+  }
+
   private triggerMarketChange(): void {
     const quotes: Quote[] = this.generateRandomMarket();
     this.marketChange.next(quotes);

@@ -13,6 +13,10 @@ import {AccountComponent} from '../account/account.component';
 import {isNull, isNullOrUndefined, isUndefined} from 'util';
 import {CurrencyPair} from '../finance-domain/CurrencyPair';
 import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
+import {TradeManager} from '../finance-domain/TradeManager';
+import {SpotTrade} from '../finance-domain/SpotTrade';
+import {BUY} from '../finance-domain/Side';
+import {CAPTURED} from '../finance-domain/TradeStatus';
 
 @Component({
   selector: 'app-market-component',
@@ -28,7 +32,7 @@ export class MarketComponent implements OnInit {
   @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
   @ViewChild('yourQuantity') yourQuantityComponent: ElementRef;
 
-  constructor(private marketManager: RandomMarketManager) {
+  constructor(private marketManager: RandomMarketManager, private tradeManager: TradeManager) {
   }
 
   ngOnInit() {
@@ -83,14 +87,32 @@ export class MarketComponent implements OnInit {
       return;
     }
 
+    const quote: Quote = this.marketManager.getQuote(currencyPair);
+    if (isNullOrUndefined(quote)) {
+      console.log('No quote for ' + currencyPair);
+      return;
+    }
 
-    this.doBuy(account, currencyPair, quantity);
+    this.doBuy(account, currencyPair, quantity, quote);
   }
 
-  doBuy(account: string, currencyPair: CurrencyPair, quantity: number): void {
+  doBuy(account: string, currencyPair: CurrencyPair, quantity: number, quote: Quote): void {
     console.log('BUY ' + account + ' ' + currencyPair + ' ' + quantity);
 
+    const trade: SpotTrade = {
+      currencyPair: currencyPair,
+      account: account,
+      quantity: quantity,
+      rate: quote.bid,
+      side: BUY,
+      tradeDate: new Date(),
+      settlementDate: new Date(), // todo
+      status: CAPTURED
+    };
 
+    // todo go to order manager first
+
+    this.tradeManager.add(trade);
   }
 
   onSellButtonClicked(): void {

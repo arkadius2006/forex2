@@ -28,6 +28,21 @@ export class ForgeMarketManager implements MarketManager {
     return this.marketChange.getValue();
   }
 
+  public getQuote(currencyPair: CurrencyPair): Quote {
+    const quotes: Quote[] = this.marketChange.getValue();
+    let i: number;
+    let q: Quote;
+    for (i = 0; i < quotes.length; i += 1) {
+      q = quotes[i];
+
+      if (currencyPair === q.currencyPair) {
+        return q;
+      }
+    }
+
+    return null;
+  }
+
   private queryForge(): void {
     console.log('Sending request to forge');
 
@@ -79,13 +94,13 @@ export class ForgeMarketManager implements MarketManager {
     const price: number = item['price'];
 
     if (symbol && price) {
-      const ccy1 = symbol.substr(0, 3);
-      const ccy2 = symbol.substr(3, 3);
+      const ccy1: Currency = Currency.lookup(symbol.substr(0, 3));
+      const ccy2: Currency = Currency.lookup(symbol.substr(3, 3));
       const theTimestamp = new Date();
 
       return {
         timestamp: theTimestamp,
-        currencyPair: new CurrencyPair(new Currency(ccy1), new Currency(ccy2)), // todo currencies singletons
+        currencyPair: CurrencyPair.lookupByCurrencies(ccy1, ccy2),
         bid: price,
         ask: price
       };
