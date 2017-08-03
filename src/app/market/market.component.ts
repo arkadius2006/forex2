@@ -21,7 +21,7 @@ export class MarketComponent implements OnInit {
   exampleDatabase;
   marketSource: ExampleDataSource | null;
 
-  @ViewChild('filter') filter: ElementRef;
+  @ViewChild('currencyPair') filter: ElementRef;
 
   constructor(private marketService: MarketService) {
     this.exampleDatabase = new ExampleDatabase(marketService);

@@ -1,5 +1,4 @@
 <div class="history-container mat-elevation-z8">
-  <h2>This is history</h2>
   <form class="history-form">
     <md-input-container class="history-input-container" floatPlaceholder="always">
       <input mdInput #historyFilterCurrencyPair placeholder="Type currency pair...">
@@ -51,3 +50,9 @@
     <md-row *cdkRowDef="let trade; columns: displayedColumns;"></md-row>
   </md-table>
 </div>
+
+<form class="history-form">
+  <md-input-container class="history-input-container" floatPlaceholder="always">
+    <input mdInput #historyFilterCurrencyPair placeholder="Type currency pair...">
+  </md-input-container>
+</form>

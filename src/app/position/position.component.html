@@ -1,11 +1,11 @@
-<div class="market-container mat-elevation-z8">
-  <h2>This is positions</h2>
-  <form class="market-form">
-    <md-input-container class="market-input-container" floatPlaceholder="always">
-      <input mdInput #filter placeholder="Type currency pair...">
-    </md-input-container>
-  </form>
+<form class="position">
+  <md-input-container class="position-input-container" floatPlaceholder="always">
+    <input mdInput #filter placeholder="Type currency pair...">
+  </md-input-container>
+</form>
 
+
+<div class="position mat-elevation-z8">
   <md-table #table [dataSource]="positionSource">
 
     <ng-container cdkColumnDef="currency">

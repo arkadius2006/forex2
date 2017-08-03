@@ -1,33 +1,54 @@
-<div class="market-container mat-elevation-z8">
-  <form class="market-form">
+<md-card>
+  <md-card-content>
     <md-input-container class="market-input-container" floatPlaceholder="always">
-      <input mdInput #filter placeholder="Type currency pair...">
+      <input mdInput #currencyPair placeholder="Type currency pair..." style="border: 2px red">
     </md-input-container>
-  </form>
+  </md-card-content>
+
+  <md-card-content>
+    <md-input-container class="market-input-container" floatPlaceholder="always">
+      <input mdInput #quantity placeholder="Type quantity..." style="border: 2px orange">
+    </md-input-container>
+  </md-card-content>
+
+  <md-card-content>
+    <button md-button>BUY</button>
+  </md-card-content>
+
+  <md-card-content>
+    <button md-button>SELL</button>
+  </md-card-content>
+
+</md-card>
+
+
+<div class="market-container mat-elevation-z8">
 
   <md-table #table [dataSource]="marketSource">
 
     <ng-container cdkColumnDef="currencyPair">
-      <md-header-cell *cdkHeaderCellDef> Currency pair </md-header-cell>
-      <md-cell *cdkCellDef="let quote"> {{quote.currencyPair}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Currency pair</md-header-cell>
+      <md-cell *cdkCellDef="let quote"> {{quote.currencyPair}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="bid">
-      <md-header-cell *cdkHeaderCellDef> Bid </md-header-cell>
-      <md-cell *cdkCellDef="let quote"> {{quote.bid}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Bid</md-header-cell>
+      <md-cell *cdkCellDef="let quote"> {{quote.bid}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="ask">
-      <md-header-cell *cdkHeaderCellDef> Ask </md-header-cell>
-      <md-cell *cdkCellDef="let quote"> {{quote.ask}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Ask</md-header-cell>
+      <md-cell *cdkCellDef="let quote"> {{quote.ask}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="timestamp">
-      <md-header-cell *cdkHeaderCellDef> Timestamp </md-header-cell>
-      <md-cell *cdkCellDef="let quote"> {{quote.timestamp.toLocaleTimeString()}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Timestamp</md-header-cell>
+      <md-cell *cdkCellDef="let quote"> {{quote.timestamp.toLocaleTimeString()}}</md-cell>
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *cdkRowDef="let quote; columns: displayedColumns;"></md-row>
   </md-table>
 </div>
+
+

@@ -99,7 +99,11 @@ import {AboutComponent} from './about/about.component';
   ],
 
   imports: [
-    BrowserModule, FormsModule, RouterModule.forRoot([
+    BrowserModule, FormsModule,
+
+
+/*
+    RouterModule.forRoot([
         {
           path: 'market',
           component: MarketComponent
@@ -118,6 +122,11 @@ import {AboutComponent} from './about/about.component';
         }
       ]
     ),
+*/
+
+
+
+
     MdAutocompleteModule,
     MdButtonModule,
     MdButtonToggleModule,
@@ -159,4 +168,8 @@ import {AboutComponent} from './about/about.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  public onSelectTab(): void {
+    console.log('Tab selected');
+  }
 }

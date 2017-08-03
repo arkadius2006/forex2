@@ -38,8 +38,8 @@ export class MarketService {
   getDelayedMarketPromise(): Promise<Quote[]> {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve(this.getQuotePromiseLive());
-      }, 2000);
+        resolve(this.getStaticMarketPromise());
+      }, 10000);
     });
   }
 

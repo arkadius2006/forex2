@@ -1,6 +1,41 @@
-<h1>Forex workbench</h1>
-<nav><a routerLink="/market">Market</a></nav>
-<nav><a routerLink="/position">Position</a></nav>
-<nav><a routerLink="/history">History</a></nav>
-<nav><a routerLink="/about">About</a></nav>
-<router-outlet></router-outlet>
+<md-tab-group dynamicHeight="true">
+
+  <md-tab>
+
+    <ng-template md-tab-label>
+      Market
+    </ng-template>
+
+    <app-market-component></app-market-component>
+
+  </md-tab>
+
+  <md-tab>
+    <ng-template md-tab-label>
+      Position
+    </ng-template>
+
+    <app-position-component></app-position-component>
+
+  </md-tab>
+
+  <md-tab>
+    <ng-template md-tab-label>
+      History
+    </ng-template>
+
+    <app-history-component></app-history-component>
+
+  </md-tab>
+
+  <md-tab>
+    <ng-template md-tab-label>
+      About
+    </ng-template>
+
+    <app-about-component></app-about-component>
+
+  </md-tab>
+
+
+</md-tab-group>
