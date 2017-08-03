@@ -27,6 +27,14 @@ export class PositionManager {
     marketManager.asMarketObservable().subscribe(new PnlKeeper(this));
   }
 
+  public getPositions(): Position[] {
+    return this.positions;
+  }
+
+  public getPnl(): number {
+    return this.pnl;
+  }
+
   public asPositionObservable(): Observable<Position[]> {
     return this.positionChange.asObservable();
   }
