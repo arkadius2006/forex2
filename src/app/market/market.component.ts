@@ -13,10 +13,9 @@ import {AccountComponent} from '../account/account.component';
 import {isNull, isNullOrUndefined, isUndefined} from 'util';
 import {CurrencyPair} from '../finance-domain/CurrencyPair';
 import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
-import {TradeManager} from '../finance-domain/TradeManager';
-import {SpotTrade} from '../finance-domain/SpotTrade';
 import {BUY, SELL} from '../finance-domain/Side';
-import {CAPTURED} from '../finance-domain/TradeStatus';
+import {MockExchange} from '../finance-domain/MockExchange';
+import {Order} from '../finance-domain/Order';
 
 @Component({
   selector: 'app-market-component',
@@ -32,7 +31,7 @@ export class MarketComponent implements OnInit {
   @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
   @ViewChild('yourQuantity') yourQuantityComponent: ElementRef;
 
-  constructor(private marketManager: RandomMarketManager, private tradeManager: TradeManager) {
+  constructor(private marketManager: RandomMarketManager, private exchange: MockExchange) {
   }
 
   ngOnInit() {
@@ -87,32 +86,19 @@ export class MarketComponent implements OnInit {
       return;
     }
 
-    const quote: Quote = this.marketManager.getQuote(currencyPair);
-    if (isNullOrUndefined(quote)) {
-      console.log('No quote for ' + currencyPair);
-      return;
-    }
-
-    this.doBuy(account, currencyPair, quantity, quote);
+    this.doBuy(account, currencyPair, quantity);
   }
 
-  doBuy(account: string, currencyPair: CurrencyPair, quantity: number, quote: Quote): void {
+  doBuy(account: string, currencyPair: CurrencyPair, quantity: number): void {
     console.log('BUY ' + account + ' ' + currencyPair + ' ' + quantity);
 
-    const trade: SpotTrade = {
+    const order: Order = {
       currencyPair: currencyPair,
       account: account,
       quantity: quantity,
-      rate: quote.bid,
-      side: BUY,
-      tradeDate: new Date(),
-      settlementDate: new Date(), // todo
-      status: CAPTURED
-    };
+      side: BUY};
 
-    // todo go to order manager first
-
-    this.tradeManager.add(trade);
+    this.exchange.submit(order);
   }
 
   onSellButtonClicked(): void {
@@ -153,32 +139,21 @@ export class MarketComponent implements OnInit {
       return;
     }
 
-    const quote: Quote = this.marketManager.getQuote(currencyPair);
-    if (isNullOrUndefined(quote)) {
-      console.log('No quote for ' + currencyPair);
-      return;
-    }
-
-    this.doSell(account, currencyPair, quantity, quote);
+    this.doSell(account, currencyPair, quantity);
   }
 
-  doSell(account: string, currencyPair: CurrencyPair, quantity: number, quote: Quote): void {
+  doSell(account: string, currencyPair: CurrencyPair, quantity: number): void {
     console.log('SELL ' + account + ' ' + currencyPair + ' ' + quantity);
 
-    const trade: SpotTrade = {
+    const order: Order = {
       currencyPair: currencyPair,
       account: account,
       quantity: quantity,
-      rate: quote.bid,
-      side: SELL,
-      tradeDate: new Date(),
-      settlementDate: new Date(), // todo
-      status: CAPTURED
+      side: SELL
     };
 
-    // todo go to order manager first
 
-    this.tradeManager.add(trade);
+    this.exchange.submit(order);
   }
 
 
