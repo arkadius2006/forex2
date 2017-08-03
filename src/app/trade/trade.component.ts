@@ -21,18 +21,17 @@ import {TradeManager} from '../finance-domain/TradeManager';
 })
 export class TradeComponent implements OnInit {
   displayedColumns = ['account', 'side', 'currencyPair', 'quantity', 'rate', 'tradeDate', 'settlementDate', 'status'];
-  historySource: ExampleHistoryDataSource | null;
+  historySource: TradeDataSource | null;
 
   @ViewChild('historyFilterCurrencyPair') filter: ElementRef;
 
-  private tradeObservable: Observable<SpotTrade[]>;
 
-  constructor(tradeManager: TradeManager) {
-    this.tradeObservable = tradeManager.asTradeObservable();
+  constructor(private tradeManager: TradeManager) {
+
   }
 
   ngOnInit() {
-    this.historySource = new ExampleHistoryDataSource(new ExampleHistoryDatabase());
+    this.historySource = new TradeDataSource(this.tradeManager);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -45,55 +44,7 @@ export class TradeComponent implements OnInit {
   }
 }
 
-export class ExampleHistoryDatabase {
-  dataChange: BehaviorSubject<SpotTrade[]> = new BehaviorSubject<SpotTrade[]>([]);
-
-  get data(): SpotTrade[] {
-    return this.dataChange.value;
-  }
-
-  constructor() {
-
-
-    for (let i = 0; i < 100; i++) {
-      this.addTrade();
-    }
-
-  }
-
-  private addTrade() {
-    const copiedData = this.data.slice();
-    copiedData.push(this.createNewTrade());
-    this.dataChange.next(copiedData);
-  }
-
-  private createNewTrade(): SpotTrade {
-    const maxIndex = MAJOR_CURRENCY_PAIRS.length;
-    const randomIndex = Math.floor(Math.random() * maxIndex);
-    const theCurrencyPair: CurrencyPair = MAJOR_CURRENCY_PAIRS[randomIndex];
-    const theRate = Math.floor((Math.random() * 10000)) / 100;
-    const randomBooleanIndex = Math.floor(Math.random() * 2);
-    const theSide: Side = (randomBooleanIndex === 0) ? BUY : SELL;
-    const theQuantity: number = Math.floor(Math.random() * 10 + 1) * 100;
-    const theTradeDate: Date = new Date();
-
-    // todo replace with business calendar logic T+2
-    const theSettlementDate: Date = new Date(theTradeDate.getTime() + 2 * 24 * 60 * 60 * 1000);
-
-    return {
-      account: 'Seletsky',
-      side: theSide,
-      currencyPair: theCurrencyPair,
-      quantity: theQuantity,
-      rate: theRate,
-      tradeDate: theTradeDate,
-      settlementDate: theSettlementDate,
-      status: CAPTURED
-    };
-  }
-}
-
-export class ExampleHistoryDataSource extends DataSource<any> {
+export class TradeDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -104,18 +55,18 @@ export class ExampleHistoryDataSource extends DataSource<any> {
     this._filterChange.next(filter);
   }
 
-  constructor(private _exampleHistoryDatabase: ExampleHistoryDatabase) {
+  constructor(private tradeManager: TradeManager) {
     super();
   }
 
   connect(): Observable<SpotTrade[]> {
     const displayDataChanges = [
-      this._exampleHistoryDatabase.dataChange,
+      this.tradeManager.asTradeObservable(),
       this._filterChange,
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      return this._exampleHistoryDatabase.data.slice().filter((trade: SpotTrade) => {
+      return this.tradeManager.getTrades().slice().filter((trade: SpotTrade) => {
         const theString: string = this.filter.trim().toLowerCase().replace('/', '');
         const aString: string = trade.currencyPair.toString().toLowerCase().replace('/', '');
         return aString.indexOf(theString) !== -1;
