@@ -51,13 +51,14 @@ import {MarketService} from './market/market-service';
 import {HttpModule} from '@angular/http';
 import {AboutComponent} from './about/about.component';
 import {AccountComponent} from './account/account.component';
+import {CurrencyPairComponent} from "./currency-pair/currency-pair.component";
 
 // todo rename this file to forex module
 
 @NgModule({
   declarations: [
     AppComponent,
-    MarketComponent, PositionComponent, HistoryComponent, AboutComponent, AccountComponent
+    MarketComponent, PositionComponent, HistoryComponent, AboutComponent, AccountComponent, CurrencyPairComponent
   ],
 
   exports: [

@@ -12,6 +12,7 @@ import {Quote} from '../finance-domain/Quote';
 import {MarketService} from './market-service';
 import {CurrencyPair} from '../finance-domain/CurrencyPair';
 import {AccountComponent} from '../account/account.component';
+import {CurrencyPairComponent} from '../currency-pair/currency-pair.component';
 
 @Component({
   selector: 'app-market-component',
@@ -23,7 +24,7 @@ export class MarketComponent implements OnInit {
   exampleDatabase;
   marketSource: ExampleDataSource | null;
 
-  @ViewChild('currencyPair') yourCurrencyPairFilter: ElementRef;
+  @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: CurrencyPairComponent;
 
   @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
 
@@ -35,6 +36,7 @@ export class MarketComponent implements OnInit {
 
   ngOnInit() {
     this.marketSource = new ExampleDataSource(this.exampleDatabase);
+/*
     Observable.fromEvent(this.yourCurrencyPairFilter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -44,6 +46,7 @@ export class MarketComponent implements OnInit {
         }
         this.marketSource.filter = this.yourCurrencyPairFilter.nativeElement.value;
       });
+*/
   }
 
   onBuyButtonClicked(): void {
@@ -60,14 +63,7 @@ export class MarketComponent implements OnInit {
     // get account
 
 
-    const yourCurrencyPair: CurrencyPair = CurrencyPair.lookup(this.yourCurrencyPairFilter.nativeElement.value);
-
-    console.log(yourCurrencyPair);
-
-    if (yourCurrencyPair === null) {
-        console.log('Invalid currency pair');
-        return;
-    }
+    console.log(this.yourCurrencyPairComponent);
 
     const yourQuantity: string = this.yourQuantityElement.nativeElement.value;
 

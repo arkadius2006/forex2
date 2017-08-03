@@ -1,0 +1,9 @@
+<md-input-container>
+  <input mdInput #inputField placeholder="Currency pair" [mdAutocomplete]="auto" [formControl]="currencyPairCtrl">
+</md-input-container>
+
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let currencyPair of filteredCurrencyPairs | async" [value]="currencyPair">
+    {{ currencyPair }}
+  </md-option>
+</md-autocomplete>
