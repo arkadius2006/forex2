@@ -12,6 +12,7 @@ import {SpotTrade} from '../finance-domain/SpotTrade';
 import {CurrencyPair, MAJOR_CURRENCY_PAIRS} from '../finance-domain/CurrencyPair';
 import {BUY, SELL, Side} from '../finance-domain/Side';
 import {CAPTURED} from '../finance-domain/TradeStatus';
+import {TradeManager} from '../finance-domain/TradeManager';
 
 @Component({
   selector: 'app-history-component',
@@ -24,8 +25,14 @@ export class HistoryComponent implements OnInit {
 
   @ViewChild('historyFilterCurrencyPair') filter: ElementRef;
 
+  private tradeObservable: Observable<SpotTrade[]>;
+
+  constructor(tradeManager: TradeManager) {
+    this.tradeObservable = tradeManager.asTradeObservable();
+  }
+
   ngOnInit() {
-    this.historySource = new ExampleHistoryDataSource();
+    this.historySource = new ExampleHistoryDataSource(new ExampleHistoryDatabase());
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -88,7 +95,6 @@ export class ExampleHistoryDatabase {
 
 export class ExampleHistoryDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
-  private _exampleHistoryDatabase: ExampleHistoryDatabase;
 
   get filter(): string {
     return this._filterChange.value;
@@ -98,9 +104,8 @@ export class ExampleHistoryDataSource extends DataSource<any> {
     this._filterChange.next(filter);
   }
 
-  constructor() {
+  constructor(private _exampleHistoryDatabase: ExampleHistoryDatabase) {
     super();
-    this._exampleHistoryDatabase = new ExampleHistoryDatabase();
   }
 
   connect(): Observable<SpotTrade[]> {

@@ -4,20 +4,20 @@
 
     <app-account-component #yourAccount></app-account-component>
 
-    <app-currency-pair #yourCurrencyPair></app-currency-pair>
+    <md-input-container class="market-input-container" floatPlaceholder="auto">
+      <input mdInput #yourCurrencyPair placeholder="Currency pair">
+    </md-input-container>
 
     <md-input-container class="market-input-container" floatPlaceholder="auto">
       <input mdInput #yourQuantity placeholder="Quantity">
     </md-input-container>
 
-
-
-    <md-card-actions>
-      <button md-button (click)="onBuyButtonClicked()">BUY</button>
-      <button md-button (click)="onSellButtonClicked()">SELL</button>
-    </md-card-actions>
-
   </md-card-content>
+
+  <md-card-actions>
+    <button md-button (click)="onBuyButtonClicked()">BUY</button>
+    <button md-button (click)="onSellButtonClicked()">SELL</button>
+  </md-card-actions>
 
 </md-card>
 

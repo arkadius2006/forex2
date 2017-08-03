@@ -47,11 +47,14 @@ import {
 
 import {CdkTableModule} from '@angular/cdk/table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MarketService} from './market/market-service';
 import {HttpModule} from '@angular/http';
 import {AboutComponent} from './about/about.component';
 import {AccountComponent} from './account/account.component';
-import {CurrencyPairComponent} from "./currency-pair/currency-pair.component";
+import {CurrencyPairComponent} from './currency-pair/currency-pair.component';
+import {TradeManager} from './finance-domain/TradeManager';
+import {PositionManager} from './finance-domain/PositionManager';
+import {RandomMarketManager} from './finance-domain/RandomMarketManager';
+import {ForgeMarketManager} from './finance-domain/ForgeMarketManager';
 
 // todo rename this file to forex module
 
@@ -100,32 +103,6 @@ import {CurrencyPairComponent} from "./currency-pair/currency-pair.component";
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
 
-
-/*
-    RouterModule.forRoot([
-        {
-          path: 'market',
-          component: MarketComponent
-        },
-        {
-          path: 'position',
-          component: PositionComponent
-        },
-        {
-          path: 'history',
-          component: HistoryComponent
-        },
-        {
-          path: 'about',
-          component: AboutComponent
-        }
-      ]
-    ),
-*/
-
-
-
-
     MdAutocompleteModule,
     MdButtonModule,
     MdButtonToggleModule,
@@ -163,12 +140,9 @@ import {CurrencyPairComponent} from "./currency-pair/currency-pair.component";
     BrowserAnimationsModule,
     HttpModule
   ],
-  providers: [MarketService],
+
+  providers: [TradeManager, PositionManager, RandomMarketManager, ForgeMarketManager],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-  public onSelectTab(): void {
-    console.log('Tab selected');
-  }
 }

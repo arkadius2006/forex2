@@ -9,67 +9,86 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import {DataSource} from '@angular/cdk/table';
 import {Quote} from '../finance-domain/Quote';
-import {MarketService} from './market-service';
-import {CurrencyPair} from '../finance-domain/CurrencyPair';
 import {AccountComponent} from '../account/account.component';
-import {CurrencyPairComponent} from '../currency-pair/currency-pair.component';
+import {isNull, isNullOrUndefined, isUndefined} from 'util';
+import {CurrencyPair} from '../finance-domain/CurrencyPair';
+import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
 
 @Component({
   selector: 'app-market-component',
   styleUrls: ['market.component.css'],
   templateUrl: 'market.component.html',
 })
+
 export class MarketComponent implements OnInit {
   displayedColumns = ['currencyPair', 'bid', 'ask', 'timestamp'];
-  exampleDatabase;
-  marketSource: ExampleDataSource | null;
+  private marketSource: MarketDataSource | null;
 
-  @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: CurrencyPairComponent;
-
+  @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: ElementRef;
   @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
+  @ViewChild('yourQuantity') yourQuantityComponent: ElementRef;
 
-  @ViewChild('yourQuantity') yourQuantityElement: ElementRef;
-
-  constructor(private marketService: MarketService) {
-    this.exampleDatabase = new ExampleDatabase(marketService);
+  constructor(private marketManager: RandomMarketManager) {
   }
 
   ngOnInit() {
-    this.marketSource = new ExampleDataSource(this.exampleDatabase);
-/*
-    Observable.fromEvent(this.yourCurrencyPairFilter.nativeElement, 'keyup')
+    this.marketSource = new MarketDataSource(this.marketManager);
+
+    Observable.fromEvent(this.yourCurrencyPairComponent.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.marketSource) {
           return;
         }
-        this.marketSource.filter = this.yourCurrencyPairFilter.nativeElement.value;
+        this.marketSource.filter = this.yourCurrencyPairComponent.nativeElement.value;
       });
-*/
   }
 
   onBuyButtonClicked(): void {
-    console.log('Buy');
+    this.buy(
+      this.yourAccountComponent.get(),
+      this.yourCurrencyPairComponent.nativeElement.value,
+      this.yourQuantityComponent.nativeElement.value);
+  }
 
-    console.log(this.yourAccountComponent);
+  private buy(account: string, pairString: string, quantityString: string): void {
+    if (isUndefined(account) || isNull(account) || account === '') {
+      console.log('Invalid account');
+      return;
+    }
 
-    console.log(this.yourAccountComponent.get());
+    let currencyPair: CurrencyPair;
+    if (isUndefined(pairString) || isNull(pairString) || pairString === '') {
+      console.log('Invalid pairString');
+      return;
+    }
 
-    // console.log('Selected account: ' + this.account.account)
+    currencyPair = CurrencyPair.lookup(pairString);
+    if (isNullOrUndefined(currencyPair)) {
+      console.log('Invalid currency pairString');
+      return;
+    }
 
-    // get currency
-    // get quantity
-    // get account
+    if (isUndefined(quantityString) || isNull(quantityString) || quantityString === '') {
+      console.log('Invalid quantityString');
+      return;
+    }
+
+    const quantity: number = parseFloat(quantityString);
+    if (quantity > 0) {
+
+    } else {
+      console.log('Invalid qty');
+      return;
+    }
 
 
-    console.log(this.yourCurrencyPairComponent);
+    this.doBuy(account, currencyPair, quantity);
+  }
 
-    const yourQuantity: string = this.yourQuantityElement.nativeElement.value;
-
-    console.log('Your quantity is ' + yourQuantity);
-
-
+  doBuy(account: string, currencyPair: CurrencyPair, quantity: number): void {
+    console.log('BUY ' + account + ' ' + currencyPair + ' ' + quantity);
 
 
   }
@@ -79,55 +98,30 @@ export class MarketComponent implements OnInit {
   }
 }
 
-export class ExampleDatabase {
-  dataChange: BehaviorSubject<Quote[]> = new BehaviorSubject<Quote[]>([]);
-  promise: Promise<Quote[]>;
+export class MarketDataSource extends DataSource<any> {
+  private filterChange = new BehaviorSubject('');
 
-  get data(): Quote[] {
-    return this.dataChange.value;
-  }
-
-  constructor(private marketService: MarketService) {
-    this.initPromise();
-  }
-
-  private initPromise() {
-    this.promise = this.marketService.getDelayedMarketPromise();
-    this.promise.then(data => this.onMarketDataUpdate(data));
-  }
-
-  private onMarketDataUpdate(data: Quote[]): void {
-    console.log('Received market data updated');
-    this.dataChange.next(data);
-
-    // ask for new promise!!! again...
-    this.initPromise();
-  }
-}
-
-export class ExampleDataSource extends DataSource<any> {
-  _filterChange = new BehaviorSubject('');
-
-  get filter(): string {
-    return this._filterChange.value;
-  }
-
-  set filter(filter: string) {
-    this._filterChange.next(filter);
-  }
-
-  constructor(private _exampleDatabase: ExampleDatabase) {
+  constructor(private marketManager: RandomMarketManager) {
     super();
   }
 
+  get filter(): string {
+    return this.filterChange.value;
+  }
+
+  set filter(filter: string) {
+    this.filterChange.next(filter);
+  }
+
+
   connect(): Observable<Quote[]> {
     const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._filterChange,
+      this.marketManager.asMarketObservable(),
+      this.filterChange,
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      return this._exampleDatabase.data.slice().filter((quote: Quote) => {
+      return this.marketManager.getMarket().slice().filter((quote: Quote) => {
         const theString: string = this.filter.trim().toLowerCase().replace('/', '');
         const aString: string = quote.currencyPair.toString().toLowerCase().replace('/', '');
         return aString.indexOf(theString) !== -1;

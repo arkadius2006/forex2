@@ -9,7 +9,7 @@ export class CurrencyPair {
       let cp;
       for (i = 0; i < MAJOR_CURRENCY_PAIRS.length; i += 1) {
         cp = MAJOR_CURRENCY_PAIRS[i];
-        if (cp.toString() === s) {
+        if (cp.toString().toLowerCase().replace('/', '') === s.toLowerCase().replace('/', '')) {
           return cp;
         }
       }
