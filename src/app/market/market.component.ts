@@ -28,8 +28,6 @@ export class MarketComponent implements OnInit {
   marketSource: MarketDataSource | null;
 
   @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: ElementRef;
-  @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
-  @ViewChild('yourQuantity') yourQuantityComponent: ElementRef;
 
   constructor(private marketManager: RandomMarketManager, private exchange: MockExchange) {
   }
@@ -47,116 +45,6 @@ export class MarketComponent implements OnInit {
         this.marketSource.filter = this.yourCurrencyPairComponent.nativeElement.value;
       });
   }
-
-  onBuyButtonClicked(): void {
-    this.buy(
-      this.yourAccountComponent.get(),
-      this.yourCurrencyPairComponent.nativeElement.value,
-      this.yourQuantityComponent.nativeElement.value);
-  }
-
-  private buy(account: string, pairString: string, quantityString: string): void {
-    if (isUndefined(account) || isNull(account) || account === '') {
-      console.log('Invalid account');
-      return;
-    }
-
-    let currencyPair: CurrencyPair;
-    if (isUndefined(pairString) || isNull(pairString) || pairString === '') {
-      console.log('Invalid pairString');
-      return;
-    }
-
-    currencyPair = CurrencyPair.lookup(pairString);
-    if (isNullOrUndefined(currencyPair)) {
-      console.log('Invalid currency pairString');
-      return;
-    }
-
-    if (isUndefined(quantityString) || isNull(quantityString) || quantityString === '') {
-      console.log('Invalid quantityString');
-      return;
-    }
-
-    const quantity: number = parseFloat(quantityString);
-    if (quantity > 0) {
-
-    } else {
-      console.log('Invalid qty');
-      return;
-    }
-
-    this.doBuy(account, currencyPair, quantity);
-  }
-
-  doBuy(account: string, currencyPair: CurrencyPair, quantity: number): void {
-    console.log('BUY ' + account + ' ' + currencyPair + ' ' + quantity);
-
-    const order: Order = {
-      currencyPair: currencyPair,
-      account: account,
-      quantity: quantity,
-      side: BUY};
-
-    this.exchange.submit(order);
-  }
-
-  onSellButtonClicked(): void {
-    this.sell(
-      this.yourAccountComponent.get(),
-      this.yourCurrencyPairComponent.nativeElement.value,
-      this.yourQuantityComponent.nativeElement.value);
-  }
-
-  private sell(account: string, pairString: string, quantityString: string): void {
-    if (isUndefined(account) || isNull(account) || account === '') {
-      console.log('Invalid account');
-      return;
-    }
-
-    let currencyPair: CurrencyPair;
-    if (isUndefined(pairString) || isNull(pairString) || pairString === '') {
-      console.log('Invalid pairString');
-      return;
-    }
-
-    currencyPair = CurrencyPair.lookup(pairString);
-    if (isNullOrUndefined(currencyPair)) {
-      console.log('Invalid currency pairString');
-      return;
-    }
-
-    if (isUndefined(quantityString) || isNull(quantityString) || quantityString === '') {
-      console.log('Invalid quantityString');
-      return;
-    }
-
-    const quantity: number = parseFloat(quantityString);
-    if (quantity > 0) {
-
-    } else {
-      console.log('Invalid qty');
-      return;
-    }
-
-    this.doSell(account, currencyPair, quantity);
-  }
-
-  doSell(account: string, currencyPair: CurrencyPair, quantity: number): void {
-    console.log('SELL ' + account + ' ' + currencyPair + ' ' + quantity);
-
-    const order: Order = {
-      currencyPair: currencyPair,
-      account: account,
-      quantity: quantity,
-      side: SELL
-    };
-
-
-    this.exchange.submit(order);
-  }
-
-
 }
 
 export class MarketDataSource extends DataSource<any> {

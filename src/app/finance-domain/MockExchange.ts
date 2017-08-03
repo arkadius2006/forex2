@@ -31,6 +31,8 @@ export class MockExchange implements Exchange {
   }
 
   private execute(order: Order): SpotTrade {
+    console.log(JSON.stringify(order));
+
     const quote: Quote = this.marketManager.getQuote(order.currencyPair);
 
     let rate: number;

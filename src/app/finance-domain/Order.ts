@@ -6,4 +6,8 @@ export class Order {
   side: Side;
   quantity: number;
   account: string;
+
+  public toString(): string {
+    return this.currencyPair.toString() + ' ' + this.side.toString();
+  }
 }

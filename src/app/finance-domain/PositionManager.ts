@@ -72,8 +72,8 @@ export class PositionManager {
       }
 
       case SELL: {
-        baseAmount = t.quantity;
-        counterAmount = -t.rate * baseAmount;
+        baseAmount = -t.quantity;
+        counterAmount = t.rate * baseAmount;
         break;
       }
 
@@ -92,8 +92,6 @@ export class PositionManager {
     const pos: Position = this.get(account, currency);
     pos.quantity += amount;
     this.pnl += this.computePnl(currency, amount);
-
-    console.log('Updated position: ' + pos);
   }
 
   private get(account: string, currency: Currency): Position {

@@ -26,7 +26,7 @@ export class OrderComponent implements OnInit {
   @ViewChild('yourQuantity') yourQuantityComponent: ElementRef;
 
   yourBid: number;
-  yourAsk:  number;
+  yourAsk: number;
 
   constructor(private marketManager: RandomMarketManager, private exchange: MockExchange) {
   }
@@ -36,16 +36,13 @@ export class OrderComponent implements OnInit {
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
-      this.updateRates();
+        this.updateRates();
       });
 
     this.marketManager.asMarketObservable().subscribe((val) => this.updateRates());
   }
 
   private updateRates() {
-    console.log('Check rates');
-    console.log('Text field = ' + this.yourCurrencyPairComponent.nativeElement.value);
-
     const val = this.yourCurrencyPairComponent.nativeElement.value;
 
     if (val) {
@@ -55,17 +52,9 @@ export class OrderComponent implements OnInit {
         if (q) {
           this.yourBid = q.bid;
           this.yourAsk = q.ask;
-          console.log('Updated rates ' + this.yourBid + ' ' + this.yourAsk);
-
           return;
-        } else {
-          console.log('No md for ' + cp);
         }
-      } else {
-        console.log('cannot resolve cp ' + val);
       }
-    } else {
-      console.log('no currency pair entered');
     }
 
     this.yourBid = null;
@@ -120,7 +109,8 @@ export class OrderComponent implements OnInit {
       currencyPair: currencyPair,
       account: account,
       quantity: quantity,
-      side: BUY};
+      side: BUY
+    };
 
     this.exchange.submit(order);
   }
@@ -176,6 +166,9 @@ export class OrderComponent implements OnInit {
       side: SELL
     };
 
+
+    console.log('ATTE ' + order.toString());
+    console.log(JSON.stringify(order));
 
     this.exchange.submit(order);
   }

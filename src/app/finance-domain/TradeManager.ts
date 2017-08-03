@@ -35,6 +35,7 @@ class TradeKeeper implements NextObserver<SpotTrade> {
   constructor(tm: TradeManager) {
     this.next = function (val: SpotTrade) {
       if (val) {
+        console.log(JSON.stringify(val));
         tm.add(val);
       }
     };
