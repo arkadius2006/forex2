@@ -5,15 +5,8 @@ import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 
-import {HeroesComponent} from './heroes.component';
-
-import {HeroDetailComponent} from './hero-detail.component';
-
-import {HeroService} from './hero.service';
 
 import {RouterModule} from '@angular/router';
-
-import {DashboardComponent} from './dashboard.component';
 
 import {MarketComponent} from './market/market.component';
 import {PositionComponent} from './position/position.component';
@@ -56,7 +49,6 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
-import {TableFilteringExample} from './example/table-filtering-example';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MarketService} from './market/market-service';
 import {HttpModule} from '@angular/http';
@@ -66,8 +58,8 @@ import {AboutComponent} from './about/about.component';
 
 @NgModule({
   declarations: [
-    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent,
-    MarketComponent, PositionComponent, HistoryComponent, TableFilteringExample, AboutComponent
+    AppComponent,
+    MarketComponent, PositionComponent, HistoryComponent, AboutComponent
   ],
 
   exports: [
@@ -109,14 +101,6 @@ import {AboutComponent} from './about/about.component';
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot([
         {
-          path: 'dashboard',
-          component: DashboardComponent
-        },
-        {
-          path: 'heroes',
-          component: HeroesComponent
-        },
-        {
           path: 'market',
           component: MarketComponent
         },
@@ -127,10 +111,6 @@ import {AboutComponent} from './about/about.component';
         {
           path: 'history',
           component: HistoryComponent
-        },
-        {
-          path: 'demo',
-          component: TableFilteringExample
         },
         {
           path: 'about',
@@ -175,7 +155,7 @@ import {AboutComponent} from './about/about.component';
     BrowserAnimationsModule,
     HttpModule
   ],
-  providers: [HeroService, MarketService],
+  providers: [MarketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
