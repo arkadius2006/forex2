@@ -1,0 +1,9 @@
+<md-input-container>
+  <input mdInput placeholder="Account" [mdAutocomplete]="auto" [formControl]="accountCtrl">
+</md-input-container>
+
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let account of filteredAccounts | async" [value]="account">
+    {{ account }}
+  </md-option>
+</md-autocomplete>

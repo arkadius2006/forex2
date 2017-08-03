@@ -1,12 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
-
-
-import {RouterModule} from '@angular/router';
 
 import {MarketComponent} from './market/market.component';
 import {PositionComponent} from './position/position.component';
@@ -53,13 +50,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MarketService} from './market/market-service';
 import {HttpModule} from '@angular/http';
 import {AboutComponent} from './about/about.component';
+import {AccountComponent} from './account/account.component';
 
 // todo rename this file to forex module
 
 @NgModule({
   declarations: [
     AppComponent,
-    MarketComponent, PositionComponent, HistoryComponent, AboutComponent
+    MarketComponent, PositionComponent, HistoryComponent, AboutComponent, AccountComponent
   ],
 
   exports: [
@@ -99,7 +97,7 @@ import {AboutComponent} from './about/about.component';
   ],
 
   imports: [
-    BrowserModule, FormsModule,
+    BrowserModule, FormsModule, ReactiveFormsModule,
 
 
 /*
