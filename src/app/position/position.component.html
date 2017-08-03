@@ -1,11 +1,16 @@
-<form class="position">
-  <md-input-container class="position-input-container" floatPlaceholder="always">
-    <input mdInput #filter placeholder="Type currency pair...">
-  </md-input-container>
-</form>
+<md-card>
 
+  <md-card-content>
 
-<div class="position mat-elevation-z8">
+    <md-input-container class="position-input-container" floatPlaceholder="auto">
+      <input mdInput #filter placeholder="Currency">
+    </md-input-container>
+
+  </md-card-content>
+
+</md-card>
+
+<div class="position-container mat-elevation-z8">
   <md-table #table [dataSource]="positionSource">
 
     <ng-container cdkColumnDef="currency">

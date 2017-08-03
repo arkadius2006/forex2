@@ -1,58 +1,60 @@
-<div class="history-container mat-elevation-z8">
-  <form class="history-form">
-    <md-input-container class="history-input-container" floatPlaceholder="always">
-      <input mdInput #historyFilterCurrencyPair placeholder="Type currency pair...">
-    </md-input-container>
-  </form>
+<md-card>
 
+  <md-card-content>
+    <md-input-container class="history-input-container" floatPlaceholder="auto">
+      <input mdInput #historyFilterCurrencyPair placeholder="Currency pair">
+    </md-input-container>
+
+
+  </md-card-content>
+
+</md-card>
+
+
+<div class="history-container mat-elevation-z8">
   <md-table #historyTable [dataSource]="historySource">
 
     <ng-container cdkColumnDef="account">
-      <md-header-cell *cdkHeaderCellDef> Account </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.account}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Account</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.account}}</md-cell>
     </ng-container>
     <ng-container cdkColumnDef="side">
-      <md-header-cell *cdkHeaderCellDef> Side </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.side}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Side</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.side}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="quantity">
-      <md-header-cell *cdkHeaderCellDef> Quantity </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.quantity}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Quantity</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.quantity}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="rate">
-      <md-header-cell *cdkHeaderCellDef> Exchange rate </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.rate}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Exchange rate</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.rate}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="currencyPair">
-      <md-header-cell *cdkHeaderCellDef> Currency pair </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.currencyPair}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Currency pair</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.currencyPair}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="tradeDate">
-      <md-header-cell *cdkHeaderCellDef> Trade date </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.tradeDate.toDateString()}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Trade date</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.tradeDate.toDateString()}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="settlementDate">
-      <md-header-cell *cdkHeaderCellDef> Settlement date </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.settlementDate.toDateString()}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Settlement date</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.settlementDate.toDateString()}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="status">
-      <md-header-cell *cdkHeaderCellDef> Trade status </md-header-cell>
-      <md-cell *cdkCellDef="let trade"> {{trade.status}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> Trade status</md-header-cell>
+      <md-cell *cdkCellDef="let trade"> {{trade.status}}</md-cell>
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *cdkRowDef="let trade; columns: displayedColumns;"></md-row>
   </md-table>
-</div>
 
-<form class="history-form">
-  <md-input-container class="history-input-container" floatPlaceholder="always">
-    <input mdInput #historyFilterCurrencyPair placeholder="Type currency pair...">
-  </md-input-container>
-</form>
+</div>

@@ -39,7 +39,7 @@ export class MarketService {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(this.getStaticMarketPromise());
-      }, 10000);
+      }, 1000);
     });
   }
 

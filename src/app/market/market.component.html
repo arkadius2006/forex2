@@ -1,22 +1,20 @@
 <md-card>
+
   <md-card-content>
-    <md-input-container class="market-input-container" floatPlaceholder="always">
-      <input mdInput #currencyPair placeholder="Type currency pair..." style="border: 2px red">
+
+    <md-input-container class="market-input-container" floatPlaceholder="auto">
+      <input mdInput #currencyPair placeholder="Currency pair">
     </md-input-container>
-  </md-card-content>
 
-  <md-card-content>
-    <md-input-container class="market-input-container" floatPlaceholder="always">
-      <input mdInput #quantity placeholder="Type quantity..." style="border: 2px orange">
+    <md-input-container class="market-input-container" floatPlaceholder="auto">
+      <input mdInput #quantity placeholder="Quantity">
     </md-input-container>
-  </md-card-content>
 
-  <md-card-content>
-    <button md-button>BUY</button>
-  </md-card-content>
+    <md-card-actions>
+      <button md-button>BUY</button>
+      <button md-button>SELL</button>
+    </md-card-actions>
 
-  <md-card-content>
-    <button md-button>SELL</button>
   </md-card-content>
 
 </md-card>
