@@ -1,5 +1,5 @@
 import {Position} from './Position';
-import {Currency} from './Currency';
+import {Currency, USD} from './Currency';
 import {Injectable} from '@angular/core';
 import {Quote} from './Quote';
 import {SpotTrade} from './SpotTrade';
@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {TradeManager} from './TradeManager';
 import {BUY, SELL} from './Side';
+import {CurrencyPair} from './CurrencyPair';
 
 @Injectable()
 export class PositionManager {
@@ -132,6 +133,23 @@ export class PositionManager {
   }
 
   private computePnl(currency: Currency, amount: number): number {
+    if (currency === USD) {
+      return amount;
+    }
+
+    let i: number;
+    let q: Quote;
+    for (i = 0; i < this.latestQuotes.length; i += 1) {
+      q = this.latestQuotes[i];
+
+      const cp: CurrencyPair = q.currencyPair;
+      if (cp.getBaseCurrency() === USD) {
+        return amount / q.bid;
+      } else if (cp.getCounterCurrency() === USD) {
+        return amount * q.ask;
+      }
+    }
+    console.error('Cannot convert ' + currency.toString() + ' to USD');
     return 0; // todo
   }
 

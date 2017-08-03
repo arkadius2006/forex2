@@ -23,6 +23,8 @@ export class PositionComponent implements OnInit {
 
   @ViewChild('filter') filter: ElementRef;
 
+  yourPnL: number;
+
   constructor(private positionManager: PositionManager) {
 
   }
@@ -36,6 +38,9 @@ export class PositionComponent implements OnInit {
         if (!this.positionSource) { return; }
         this.positionSource.filter = this.filter.nativeElement.value;
       });
+
+    this.positionManager.asPnlObservable().subscribe((val) => {
+      this.yourPnL = val; });
   }
 }
 
