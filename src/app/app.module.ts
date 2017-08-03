@@ -56,13 +56,14 @@ import {PositionManager} from './finance-domain/PositionManager';
 import {RandomMarketManager} from './finance-domain/RandomMarketManager';
 import {ForgeMarketManager} from './finance-domain/ForgeMarketManager';
 import {MockExchange} from './finance-domain/MockExchange';
+import {OrderComponent} from "./order/order.component";
 
 // todo rename this file to forex module
 
 @NgModule({
   declarations: [
     AppComponent,
-    MarketComponent, PositionComponent, TradeComponent, AboutComponent, AccountComponent, CurrencyPairComponent
+    MarketComponent, PositionComponent, TradeComponent, AboutComponent, AccountComponent, CurrencyPairComponent, OrderComponent
   ],
 
   exports: [

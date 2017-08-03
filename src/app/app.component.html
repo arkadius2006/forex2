@@ -3,7 +3,7 @@
   <md-tab>
 
     <ng-template md-tab-label>
-      Market
+      Market data
     </ng-template>
 
     <app-market-component></app-market-component>
@@ -11,8 +11,18 @@
   </md-tab>
 
   <md-tab>
+
     <ng-template md-tab-label>
-      Position
+      Order
+    </ng-template>
+
+    <app-order-component></app-order-component>
+
+  </md-tab>
+
+  <md-tab>
+    <ng-template md-tab-label>
+      Position and PnL
     </ng-template>
 
     <app-position-component></app-position-component>
@@ -21,7 +31,7 @@
 
   <md-tab>
     <ng-template md-tab-label>
-      History
+      Trade capture
     </ng-template>
 
     <app-trade-component></app-trade-component>
