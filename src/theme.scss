@@ -1,3 +1,4 @@
+/*
 @import '~@angular/material/theming';
 @include mat-core();
 $primary: mat-palette($mat-green, A400);
@@ -5,3 +6,7 @@ $accent:  mat-palette($mat-light-blue, A400);
 $warn:    mat-palette($mat-red, 600);
 $theme: mat-dark-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
+*/
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
