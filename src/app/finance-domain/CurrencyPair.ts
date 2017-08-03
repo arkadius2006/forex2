@@ -2,11 +2,28 @@ import {AUD, CAD, CHF, Currency, EUR, GBP, JPY, NZD, USD} from './Currency';
 
 export class CurrencyPair {
 
+  public static lookup(s: string): CurrencyPair {
+    if (s) {
+
+      let i;
+      let cp;
+      for (i = 0; i < MAJOR_CURRENCY_PAIRS.length; i += 1) {
+        cp = MAJOR_CURRENCY_PAIRS[i];
+        if (cp.toString() === s) {
+          return cp;
+        }
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
+
   constructor(private baseCurrency: Currency, private counterCurrency: Currency) {
   }
 
   public toString(): string {
-      return this.baseCurrency + '/' + this.counterCurrency;
+    return this.baseCurrency + '/' + this.counterCurrency;
   }
 
   public getBaseCurrency(): Currency {

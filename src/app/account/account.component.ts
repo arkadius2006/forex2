@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import 'rxjs/add/operator/startWith';
@@ -11,14 +11,17 @@ import 'rxjs/add/operator/map';
 export class AccountComponent {
   accountCtrl: FormControl;
   filteredAccounts: any;
-
+  @ViewChild('inputField') inputField: ElementRef;
   accounts = ACCOUNTS;
+
+
 
   constructor() {
     this.accountCtrl = new FormControl();
     this.filteredAccounts = this.accountCtrl.valueChanges
       .startWith(null)
       .map(name => this.filterAccounts(name));
+
   }
 
   filterAccounts(val: string) {
@@ -33,6 +36,10 @@ export class AccountComponent {
       return this.accounts;
     }
 
+  }
+
+  public get(): string {
+    return this.inputField.nativeElement.value;
   }
 
 }

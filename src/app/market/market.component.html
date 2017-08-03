@@ -2,7 +2,7 @@
 
   <md-card-content>
 
-    <app-account-component></app-account-component>
+    <app-account-component #yourAccount></app-account-component>
 
 
     <md-input-container class="market-input-container" floatPlaceholder="auto">
@@ -10,14 +10,14 @@
     </md-input-container>
 
     <md-input-container class="market-input-container" floatPlaceholder="auto">
-      <input mdInput #quantity placeholder="Quantity">
+      <input mdInput #yourQuantity placeholder="Quantity">
     </md-input-container>
 
 
 
     <md-card-actions>
-      <button md-button>BUY</button>
-      <button md-button>SELL</button>
+      <button md-button (click)="onBuyButtonClicked()">BUY</button>
+      <button md-button (click)="onSellButtonClicked()">SELL</button>
     </md-card-actions>
 
   </md-card-content>

@@ -10,6 +10,8 @@ import 'rxjs/add/observable/fromEvent';
 import {DataSource} from '@angular/cdk/table';
 import {Quote} from '../finance-domain/Quote';
 import {MarketService} from './market-service';
+import {CurrencyPair} from '../finance-domain/CurrencyPair';
+import {AccountComponent} from '../account/account.component';
 
 @Component({
   selector: 'app-market-component',
@@ -21,7 +23,11 @@ export class MarketComponent implements OnInit {
   exampleDatabase;
   marketSource: ExampleDataSource | null;
 
-  @ViewChild('currencyPair') filter: ElementRef;
+  @ViewChild('currencyPair') yourCurrencyPairFilter: ElementRef;
+
+  @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
+
+  @ViewChild('yourQuantity') yourQuantityElement: ElementRef;
 
   constructor(private marketService: MarketService) {
     this.exampleDatabase = new ExampleDatabase(marketService);
@@ -29,15 +35,51 @@ export class MarketComponent implements OnInit {
 
   ngOnInit() {
     this.marketSource = new ExampleDataSource(this.exampleDatabase);
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+    Observable.fromEvent(this.yourCurrencyPairFilter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.marketSource) {
           return;
         }
-        this.marketSource.filter = this.filter.nativeElement.value;
+        this.marketSource.filter = this.yourCurrencyPairFilter.nativeElement.value;
       });
+  }
+
+  onBuyButtonClicked(): void {
+    console.log('Buy');
+
+    console.log(this.yourAccountComponent);
+
+    console.log(this.yourAccountComponent.get());
+
+    // console.log('Selected account: ' + this.account.account)
+
+    // get currency
+    // get quantity
+    // get account
+
+
+    const yourCurrencyPair: CurrencyPair = CurrencyPair.lookup(this.yourCurrencyPairFilter.nativeElement.value);
+
+    console.log(yourCurrencyPair);
+
+    if (yourCurrencyPair === null) {
+        console.log('Invalid currency pair');
+        return;
+    }
+
+    const yourQuantity: string = this.yourQuantityElement.nativeElement.value;
+
+    console.log('Your quantity is ' + yourQuantity);
+
+
+
+
+  }
+
+  onSellButtonClicked(): void {
+    console.log('Sell');
   }
 }
 
