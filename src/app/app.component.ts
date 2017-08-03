@@ -10,9 +10,10 @@ import {Component} from '@angular/core';
   '<nav><a routerLink="/position">Position</a></nav>' +
   '<nav><a routerLink="/history">History</a></nav>' +
   '<nav><a routerLink="/demo">Demo</a></nav>' +
+  '<nav><a routerLink="/about">About</a></nav>' +
   '<router-outlet></router-outlet>'
 })
 
 export class AppComponent {
-  title = 'arkady first angular app';
+  title = 'Forex workbench';
 }

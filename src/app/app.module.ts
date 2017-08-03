@@ -60,13 +60,14 @@ import {TableFilteringExample} from './example/table-filtering-example';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MarketService} from './market/market-service';
 import {HttpModule} from '@angular/http';
+import {AboutComponent} from './about/about.component';
 
 // todo rename this file to forex module
 
 @NgModule({
   declarations: [
     AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent,
-    MarketComponent, PositionComponent, HistoryComponent, TableFilteringExample
+    MarketComponent, PositionComponent, HistoryComponent, TableFilteringExample, AboutComponent
   ],
 
   exports: [
@@ -130,6 +131,10 @@ import {HttpModule} from '@angular/http';
         {
           path: 'demo',
           component: TableFilteringExample
+        },
+        {
+          path: 'about',
+          component: AboutComponent
         }
       ]
     ),
