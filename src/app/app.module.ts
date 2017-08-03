@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 
 import {MarketComponent} from './market/market.component';
 import {PositionComponent} from './position/position.component';
-import {HistoryComponent} from './history/history.component';
+import {TradeComponent} from './trade/trade.component';
 
 
 import {
@@ -61,7 +61,7 @@ import {ForgeMarketManager} from './finance-domain/ForgeMarketManager';
 @NgModule({
   declarations: [
     AppComponent,
-    MarketComponent, PositionComponent, HistoryComponent, AboutComponent, AccountComponent, CurrencyPairComponent
+    MarketComponent, PositionComponent, TradeComponent, AboutComponent, AccountComponent, CurrencyPairComponent
   ],
 
   exports: [

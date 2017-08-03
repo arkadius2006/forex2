@@ -15,11 +15,11 @@ import {CAPTURED} from '../finance-domain/TradeStatus';
 import {TradeManager} from '../finance-domain/TradeManager';
 
 @Component({
-  selector: 'app-history-component',
-  styleUrls: ['history.component.css'],
-  templateUrl: 'history.component.html',
+  selector: 'app-trade-component',
+  styleUrls: ['trade.component.css'],
+  templateUrl: 'trade.component.html',
 })
-export class HistoryComponent implements OnInit {
+export class TradeComponent implements OnInit {
   displayedColumns = ['account', 'side', 'currencyPair', 'quantity', 'rate', 'tradeDate', 'settlementDate', 'status'];
   historySource: ExampleHistoryDataSource | null;
 
