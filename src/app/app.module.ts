@@ -55,6 +55,7 @@ import {TradeManager} from './finance-domain/TradeManager';
 import {PositionManager} from './finance-domain/PositionManager';
 import {RandomMarketManager} from './finance-domain/RandomMarketManager';
 import {ForgeMarketManager} from './finance-domain/ForgeMarketManager';
+import {MockExchange} from './finance-domain/MockExchange';
 
 // todo rename this file to forex module
 
@@ -141,7 +142,7 @@ import {ForgeMarketManager} from './finance-domain/ForgeMarketManager';
     HttpModule
   ],
 
-  providers: [TradeManager, PositionManager, RandomMarketManager, ForgeMarketManager],
+  providers: [TradeManager, PositionManager, RandomMarketManager, ForgeMarketManager, MockExchange],
   bootstrap: [AppComponent]
 })
 export class AppModule {
