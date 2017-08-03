@@ -11,13 +11,19 @@
     <md-input-container class="market-input-container" floatPlaceholder="auto">
       <input mdInput #yourQuantity placeholder="Quantity">
     </md-input-container>
-
   </md-card-content>
 
   <md-card-actions>
-    <button md-button (click)="onBuyButtonClicked()">BUY</button><label>@ {{yourBid}}</label>
+    <div class="buyBox">
+      <button md-button (click)="onBuyButtonClicked()">BUY</button>
+      <label class="bidLabel">Your bid is {{yourBid}}</label>
+    </div>
 
-    <button md-button (click)="onSellButtonClicked()">SELL</button><label>@ {{yourAsk}}</label>
+    <div class="sellBox">
+      <button md-button (click)="onSellButtonClicked()">SELL</button>
+      <label class="askLabel">Your ask is {{yourAsk}}</label>
+    </div>
+
   </md-card-actions>
 
 </md-card>

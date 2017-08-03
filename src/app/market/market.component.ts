@@ -25,7 +25,7 @@ import {Order} from '../finance-domain/Order';
 
 export class MarketComponent implements OnInit {
   displayedColumns = ['currencyPair', 'bid', 'ask', 'timestamp'];
-  private marketSource: MarketDataSource | null;
+  marketSource: MarketDataSource | null;
 
   @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: ElementRef;
   @ViewChild('yourAccount') yourAccountComponent: AccountComponent;
