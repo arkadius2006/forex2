@@ -9,13 +9,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import {DataSource} from '@angular/cdk/table';
 import {Quote} from '../finance-domain/Quote';
-import {AccountComponent} from '../account/account.component';
-import {isNull, isNullOrUndefined, isUndefined} from 'util';
-import {CurrencyPair} from '../finance-domain/CurrencyPair';
-import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
-import {BUY, SELL} from '../finance-domain/Side';
 import {MockExchange} from '../finance-domain/MockExchange';
-import {Order} from '../finance-domain/Order';
+import {ForgeMarketManager} from '../finance-domain/ForgeMarketManager';
 
 @Component({
   selector: 'app-market-component',
@@ -29,7 +24,7 @@ export class MarketComponent implements OnInit {
 
   @ViewChild('yourCurrencyPair') yourCurrencyPairComponent: ElementRef;
 
-  constructor(private marketManager: RandomMarketManager, private exchange: MockExchange) {
+  constructor(private marketManager: ForgeMarketManager, private exchange: MockExchange) {
   }
 
   ngOnInit() {
@@ -50,7 +45,7 @@ export class MarketComponent implements OnInit {
 export class MarketDataSource extends DataSource<any> {
   private filterChange = new BehaviorSubject('');
 
-  constructor(private marketManager: RandomMarketManager) {
+  constructor(private marketManager: ForgeMarketManager) {
     super();
   }
 

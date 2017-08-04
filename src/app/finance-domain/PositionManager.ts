@@ -4,12 +4,12 @@ import {Injectable} from '@angular/core';
 import {Quote} from './Quote';
 import {SpotTrade} from './SpotTrade';
 import {NextObserver} from 'rxjs/Observer';
-import {RandomMarketManager} from './RandomMarketManager';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {TradeManager} from './TradeManager';
 import {BUY, SELL} from './Side';
 import {CurrencyPair} from './CurrencyPair';
+import {ForgeMarketManager} from './ForgeMarketManager';
 
 @Injectable()
 export class PositionManager {
@@ -20,7 +20,7 @@ export class PositionManager {
   private positionChange: BehaviorSubject<Position[]> = new BehaviorSubject<Position[]>([]);
   private pnlChange: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private marketManager: RandomMarketManager, tradeManager: TradeManager) {
+  constructor(private marketManager: ForgeMarketManager, tradeManager: TradeManager) {
     this.positions = [];
     this.pnl = 0;
     this.latestQuotes = [];

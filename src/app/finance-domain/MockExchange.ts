@@ -7,13 +7,13 @@ import {CAPTURED} from './TradeStatus';
 import {Quote} from './Quote';
 import {BUY, SELL} from './Side';
 import {Injectable} from '@angular/core';
-import {RandomMarketManager} from './RandomMarketManager';
+import {ForgeMarketManager} from './ForgeMarketManager';
 
 @Injectable()
 export class MockExchange implements Exchange {
   private tradeChange: BehaviorSubject<SpotTrade> = new BehaviorSubject<SpotTrade>(null);
 
-  constructor(private marketManager: RandomMarketManager) {
+  constructor(private marketManager: ForgeMarketManager) {
 
   }
 

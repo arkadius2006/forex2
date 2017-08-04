@@ -9,10 +9,10 @@ import 'rxjs/add/observable/fromEvent';
 import {AccountComponent} from '../account/account.component';
 import {isNull, isNullOrUndefined, isUndefined} from 'util';
 import {CurrencyPair} from '../finance-domain/CurrencyPair';
-import {RandomMarketManager} from '../finance-domain/RandomMarketManager';
 import {BUY, SELL} from '../finance-domain/Side';
 import {MockExchange} from '../finance-domain/MockExchange';
 import {Order} from '../finance-domain/Order';
+import {ForgeMarketManager} from '../finance-domain/ForgeMarketManager';
 
 @Component({
   selector: 'app-order-component',
@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit {
   yourBid: number;
   yourAsk: number;
 
-  constructor(private marketManager: RandomMarketManager, private exchange: MockExchange) {
+  constructor(private marketManager: ForgeMarketManager, private exchange: MockExchange) {
   }
 
   ngOnInit() {
